@@ -37,3 +37,29 @@
     transform: rotate(360deg);
   }
 }
+.home-bar {
+  background-color: #f0f0f0;
+  padding: 10px 0;
+}
+
+.home-bar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.home-bar li {
+  display: inline;
+}
+
+.home-bar a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.home-bar a:hover {
+  color: #007bff;
+}

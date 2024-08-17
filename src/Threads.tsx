@@ -66,12 +66,7 @@ export const Threads: React.FC<ThreadsProps> = ({ userName, content, time, reply
             </div>
             <div className="thread-form-container">
                 <div className="thread-form">
-                    <input
-                        type="text"
-                        placeholder="ユーザー名"
-                        value={newThread.userName}
-                        onChange={(e) => setNewThread({ ...newThread, userName: e.target.value })}
-                    />
+                    
                     <input
                         type="text"
                         placeholder="内容"
