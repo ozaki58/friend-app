@@ -11,14 +11,19 @@ interface Room {
 
 interface RoomListProps {
   rooms: Room[];  // ルームの配列をプロパティとして受け取る
+  privateRoom: boolean;
 }
 
-export const RoomList: React.FC<RoomListProps> = ({ rooms }) => {
+export const RoomList: React.FC<RoomListProps> = ({ rooms, privateRoom }) => {
   const navigate = useNavigate();
 
   // ルームクリック時に遷移
   const handleRoomClick = (id: number) => {
-    navigate(`/rooms/${id}`);  // ルームIDに基づいて遷移
+    if (privateRoom) {
+      navigate(`/privateRooms/${id}`);  // ルームIDに基づいて遷移
+    } else {
+      navigate(`/publicRooms/${id}`);  // ルームIDに基づいて遷移
+    }
   };
 
   return (

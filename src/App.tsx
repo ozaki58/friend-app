@@ -23,9 +23,12 @@ export default function App() {
       
 
       <Routes>
-        <Route path="/rooms" element={<RoomDetail />} />
-        <Route path="/" element={<RoomGet />} />
-        <Route path="/rooms/:id" element={<RoomDetail />} />
+        
+        <Route path="/" element={<RoomGet privateRoom={false} />} />
+        <Route path="/privateRooms" element={<RoomGet privateRoom={true} />} />
+        <Route path="/publicRooms" element={<RoomGet privateRoom={false} />} />
+        <Route path="/privateRooms/:id" element={<RoomDetail privateRoom={true} />} />
+        <Route path="/publicRooms/:id" element={<RoomDetail privateRoom={false} />} />
       </Routes>
       
      </div>

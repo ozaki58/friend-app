@@ -2,24 +2,46 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { RoomList } from "../Room/RoomList";
 
-export function RoomGet() {
-	const [rooms, setRooms] = useState<any>([]);
-	const url = "http://127.0.0.1:8000/rooms";
+interface RoomSettei {
+    privateRoom: boolean;
+  }
 
-	const GetData = () => {
+  
+  export const RoomGet: React.FC<RoomSettei> = ({ privateRoom }) => {
+	
+    const [publicRooms, setPublicRooms] = useState<any>([]);
+    const [privateRooms, setPrivateRooms] = useState<any>([]);
+    let url = "http://127.0.0.1:8000/";
+    if(privateRoom){
+        url = "http://127.0.0.1:8000/privateRooms";
+    }else{
+        url = "http://127.0.0.1:8000/publicRooms";
+    }
+
+	const GetPublicData = () => {
 		axios.get(url).then((res) => {
-			setRooms(res.data);  // APIから取得したデータをセット
+			setPublicRooms(res.data);  // APIから取得したデータをセット
+		});
+	};
+
+    const GetPrivateData = () => {
+		axios.get(url).then((res) => {
+			setPrivateRooms(res.data);  // APIから取得したデータをセット
 		});
 	};
 
     // 初回レンダー時にデータ取得を自動で行う
 	useEffect(() => {
-		GetData();
-	}, []);
+        if(privateRoom){
+            GetPrivateData();
+        } else {
+            GetPublicData();
+        }
+    }, [privateRoom]);
 
     return (
        <>
-       <RoomList rooms={rooms} />  {/* 取得したルームデータをRoomListに渡す */}
+       {privateRoom ? <RoomList rooms={privateRooms} privateRoom={privateRoom}/> : <RoomList rooms={publicRooms} privateRoom={privateRoom}/>}  {/* 取得したルームデータをRoomListに渡す */}
        </>
     );
 }

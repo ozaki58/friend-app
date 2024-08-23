@@ -9,19 +9,29 @@ interface Room {
   timestamp: string;
 }
 
-export const RoomDetail = () => {
+export const RoomDetail = (props: { privateRoom: boolean }) => {
   const { id } = useParams<{ id: string }>();  // URLからルームIDを取得
   const [room, setRoom] = useState<Room | null>(null);
 
   useEffect(() => {
     // ルームIDを使ってAPIから詳細を取得
-    axios.get(`http://127.0.0.1:8000/rooms/${id}`)
-      .then((res) => {
+    if (props.privateRoom) {
+      axios.get(`http://127.0.0.1:8000/privateRooms/${id}`)
+        .then((res) => {
+          setRoom(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      axios.get(`http://127.0.0.1:8000/publicRooms/${id}`)
+        .then((res) => {
         setRoom(res.data);
       })
       .catch((err) => {
-        console.error(err);
-      });
+          console.error(err);
+        });
+    }
   }, [id]);
 
   if (!room) return <div>Loading...</div>;
