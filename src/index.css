@@ -18,6 +18,7 @@ code {
 
 .thread-container {
   max-width: 600px;
+  width: 100%; /* 追加 */
   margin: 0 auto;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   background-color: #ffffff;
@@ -25,8 +26,8 @@ code {
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 20px;
-  
 }
+
 
 .thread {
   padding: 15px;
