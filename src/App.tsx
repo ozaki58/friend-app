@@ -14,6 +14,7 @@ import { HomeBar } from "./HomeBar";
 import axios from "axios";
 import { UserGet } from "./Api/UserGet";
 import { RoomGet } from "./Api/RoomGet";
+import { RoomDetail } from "./Room/RoomDetail";
 export default function App() {
   return (
     <BrowserRouter basename="/">
@@ -22,9 +23,9 @@ export default function App() {
       
 
       <Routes>
-        <Route path="/rooms" element={<Threads userName="test" content="test" time="1時間前" replyCount={2} />} />
+        <Route path="/rooms" element={<RoomDetail />} />
         <Route path="/" element={<RoomGet />} />
-        
+        <Route path="/rooms/:id" element={<RoomDetail />} />
       </Routes>
       
      </div>

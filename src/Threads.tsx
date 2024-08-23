@@ -6,9 +6,10 @@ interface ThreadsProps {
     content: string;
     time: string;
     replyCount: number;
+    roomName: string;
 }
 
-export const Threads: React.FC<ThreadsProps> = ({ userName, content, time, replyCount }) => {
+export const Threads: React.FC<ThreadsProps> = ({ userName, content, time, replyCount, roomName }) => {
     const [threads, setThreads] = useState([
         {
             userName: "test",
@@ -45,7 +46,9 @@ export const Threads: React.FC<ThreadsProps> = ({ userName, content, time, reply
 
     return (
         <div className="threads-page">
+            
             <div className="thread-container" ref={threadContainerRef}>
+                <h1 className="thread-title">{roomName}</h1>
                 {threads.map((thread, index) => (
                     <div key={index} className="thread thread-spacing">
                         <div className="thread-header">
